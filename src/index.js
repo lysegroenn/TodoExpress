@@ -9,7 +9,7 @@ const MongoStore = require('connect-mongo')(session)
 
 const users = require('./api/users.routes'); // Routes for users
 const auth = require('./api/auth.routes'); // Routes for authentication
-
+const testRoutes = require('./api/users.routes.test'); // Routes for testing frontend
 
 
 const port = 5000;
@@ -50,6 +50,8 @@ const ConnectApp = async () => {
     app.use('/users', users);
     //app.use('/api/posts', posts);
     app.use('/auth', auth);
+    // Test routes
+    app.use('/test', testRoutes);
 
 
 
@@ -67,36 +69,3 @@ const ConnectApp = async () => {
 }
 
 ConnectApp();
-
-
-/*
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 60000000},
-  store: new MongoStore({ client: MongoClient })
-})) 
-
-//Passport middleware
-app.use(passport.initialize())
-app.use(passport.session())
-
-
-
-MongoClient.connect(
-    process.env.DB_URI,
-    { useNewUrlParser: true},
-)
-.catch(err => {
-    console.error(err.stack)
-    process.exit(1)
-})
-.then(async client => {
-    await usersDAO.injectDB(client)
-    await postsDAO.injectDB(client)
- 
-    app.listen(port, () => {
-        console.log(`Listening on port ${port}`)
-    }) 
-}) */

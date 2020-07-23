@@ -8,10 +8,11 @@ const SecretKey = process.env.SECRET_KEY;
 module.exports = {
 	getUserPosts: async (req, res) => {
 		try {
+			const TestID = '115848234814211117122' ;
 			console.log(`Got getUserPosts request`)
-			if(req.user.googleId !== '') {
-				const posts = await postsDAO.getUserPosts(req.user.googleId)
-				res.status(200).json({posts, user: req.user})	
+			if(true) {
+				const posts = await postsDAO.getUserPosts(TestID)
+				res.status(200).json({posts})	
 			} else {
 				res.status(404)
 			}		
@@ -21,7 +22,7 @@ module.exports = {
 		}
 	},
 	addUserPost: async (req, res) => {
-		let user = req.user.googleId;
+		let user = '115848234814211117122';
 		let { title } = req.body;
 		//console.log(``)
 		try {
@@ -34,7 +35,7 @@ module.exports = {
 		}
 	},
 	removeUserPost: async (req, res) => {
-		let user = req.user.googleId;
+		let user = '115848234814211117122';
 		let { _id } = req.body;
 		//console.log(``)
 		try {
@@ -47,7 +48,7 @@ module.exports = {
 		}
 	},
 	addUserSub: async (req, res) => {
-		let user = req.user.googleId;
+		let user = '115848234814211117122';
 		let { _id } = req.body;
 		try {
 			const addSubResult = await postsDAO.addUserSub(user, _id)
@@ -59,7 +60,7 @@ module.exports = {
 		}
 	},
 	removeUserSub: async (req, res) => {
-		let user = req.user.googleId;
+		let user = '115848234814211117122';
 		let { _id, ind } = req.body;
 		try {
 			const removeSubResult = await postsDAO.removeUserSub(user, _id, ind)
@@ -71,7 +72,7 @@ module.exports = {
 		}
 	},
 	toggleTickSub: async (req, res) => {
-		let user = req.user.googleId;
+		let user = '115848234814211117122';
 		let { _id, ind } = req.body;
 		try {
 			const tickSubResult = await postsDAO.toggleTickSub(user, _id, ind)
