@@ -13,8 +13,5 @@ router.post('/userSub/', ensureAuth, postsCtrl.addUserSub)
 router.delete('/userSub/', ensureAuth, postsCtrl.removeUserSub)
 router.put('/tick/', ensureAuth, postsCtrl.toggleTickSub)
 
-// Test routes - to be deleted
-router.get('/test/', postsCtrl.getUserPosts)
-
 
 module.exports = router;
