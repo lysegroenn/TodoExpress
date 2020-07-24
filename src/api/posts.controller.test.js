@@ -82,5 +82,16 @@ module.exports = {
 			console.log(error)
 			res.status(500).json({ success: false})
 		}
+	},
+	toggleEditSub: async (req, res) => {
+		let user = '115848234814211117122';
+		let { _id, ind } = req.body;
+		try {
+			const editSubResult = await postsDAO.toggleEditSub(user, _id, ind)
+			res.status(200).json({ success: true })
+		} catch (error) {
+			console.log(error)
+			res.status(500).json({ success: false })
+		}
 	}
 }

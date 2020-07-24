@@ -14,6 +14,7 @@ router.delete('/userPosts/', postsCtrl.removeUserPost)
 router.post('/userSub/', postsCtrl.addUserSub)
 router.delete('/userSub/', postsCtrl.removeUserSub)
 router.put('/tick/', postsCtrl.toggleTickSub)
+router.put('/edit/', postsCtrl.toggleEditSub)
 
 
 

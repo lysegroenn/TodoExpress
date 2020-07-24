@@ -37,7 +37,7 @@ module.exports = {
     ),
     addUserSub: (user, _id) => (
         new Promise((resolve, reject) => {
-            userPosts.updateOne({_id: new mongodb.ObjectID(_id), user_id: user.email}, {$push: {items: {body: "Empty Item", ticked: false}}}, (err, data) => {
+            userPosts.updateOne({_id: new mongodb.ObjectID(_id), user_id: user.email}, {$push: {items: {body: "Empty Item", ticked: false, editing: true}}}, (err, data) => {
                 err ? reject(err) : resolve(data)
             })
         })
@@ -64,6 +64,29 @@ module.exports = {
                             sub.ticked = true
                         } else {
                             sub.ticked = false
+                        }
+                    }
+                    return sub
+                })
+                err ? reject(err) : userPosts.updateOne({_id: ID}, {$set : {items: newArray}}, (err, data) => {
+                    err ? reject(err) : resolve(data)
+                })
+            })
+        })
+    ),
+    toggleEditSub: (user, _id, ind) => (
+        new Promise((resolve, reject) => {
+            const ID = new mongodb.ObjectID(_id)
+            console.log(ID)
+            userPosts.findOne({_id: ID}, (err, data) => {
+                if(!data) reject("no post found")
+                console.log(data)
+                let newArray = data.items.map((sub, index) => {
+                    if(index === ind) {
+                        if(sub.editing === false) {
+                            sub.editing = true
+                        } else {
+                            sub.editing = false
                         }
                     }
                     return sub
