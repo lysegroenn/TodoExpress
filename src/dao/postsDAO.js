@@ -77,10 +77,8 @@ module.exports = {
     toggleEditSub: (user, _id, ind) => (
         new Promise((resolve, reject) => {
             const ID = new mongodb.ObjectID(_id)
-            console.log(ID)
             userPosts.findOne({_id: ID}, (err, data) => {
                 if(!data) reject("no post found")
-                console.log(data)
                 let newArray = data.items.map((sub, index) => {
                     if(index === ind) {
                         if(sub.editing === false) {
@@ -88,6 +86,24 @@ module.exports = {
                         } else {
                             sub.editing = false
                         }
+                    }
+                    return sub
+                })
+                err ? reject(err) : userPosts.updateOne({_id: ID}, {$set : {items: newArray}}, (err, data) => {
+                    err ? reject(err) : resolve(data)
+                })
+            })
+        })
+    ),
+    editBodySub: (user, _id, ind, body) => (
+        new Promise((resolve, reject) => {
+            const ID = new mongodb.ObjectID(_id)
+            const newBody = body;
+            userPosts.findOne({_id: ID}, (err, data) => {
+                if(!data) reject("no post found")
+                let newArray = data.items.map((sub, index) => {
+                    if(index === ind) {
+                        sub.body = newBody;
                     }
                     return sub
                 })
