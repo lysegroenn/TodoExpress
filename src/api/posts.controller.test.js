@@ -97,9 +97,13 @@ module.exports = {
 	editBodySub: async (req, res) => {
 		let user = '115848234814211117122';
 		let { _id, ind, body } = req.body;
+		if(!_id || !ind) {
+			res.status(400).json({success: false});
+			return;
+		}
 		try {
 			const editBodyResult = await postsDAO.editBodySub(user, _id, ind, body)
-			res.status(200).json({ success: true })
+			res.status(200).json({ success: true, nModified: result.nModified })
 		} catch (error) {
 			console.log(error)
 			res.status(500).json({ success: false })

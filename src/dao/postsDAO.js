@@ -97,20 +97,24 @@ module.exports = {
     ),
     editBodySub: (user, _id, ind, body) => (
         new Promise((resolve, reject) => {
-            const ID = new mongodb.ObjectID(_id)
-            const newBody = body;
-            userPosts.findOne({_id: ID}, (err, data) => {
-                if(!data) reject("no post found")
-                let newArray = data.items.map((sub, index) => {
-                    if(index === ind) {
-                        sub.body = newBody;
-                    }
-                    return sub
+            try {
+                const ID = new mongodb.ObjectID(_id)
+                const newBody = body;
+                userPosts.findOne({_id: ID, googleId: user}, (err, data) => {
+                    if(!data) return reject("no post found")
+                    let newArray = data.items.map((sub, index) => {
+                        if(index === ind) {
+                            sub.body = newBody;
+                        }
+                        return sub
+                    })
+                    userPosts.updateOne({_id: ID}, {$set : {items: newArray}}, (err, data) => {
+                        err ? reject(err) : resolve(data)
+                    })
                 })
-                err ? reject(err) : userPosts.updateOne({_id: ID}, {$set : {items: newArray}}, (err, data) => {
-                    err ? reject(err) : resolve(data)
-                })
-            })
+            } catch (err) {
+                return reject(err);
+            }
         })
     )
 }
