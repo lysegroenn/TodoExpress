@@ -12,7 +12,6 @@ router.delete('/userPosts/', ensureAuth, postsCtrl.removeUserPost)
 router.post('/userSub/', ensureAuth, postsCtrl.addUserSub)
 router.delete('/userSub/', ensureAuth, postsCtrl.removeUserSub)
 router.put('/tick/', ensureAuth, postsCtrl.toggleTickSub)
-router.put('/edit/',ensureAuth, postsCtrl.toggleEditSub)
 router.put('/editBody/',ensureAuth, postsCtrl.editBodySub)
 
 
