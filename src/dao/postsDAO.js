@@ -35,9 +35,9 @@ module.exports = {
             })
         })
     ),
-    addUserSub: (user, _id) => (
+    addUserSub: (user, _id, body) => (
         new Promise((resolve, reject) => {
-            userPosts.updateOne({_id: new mongodb.ObjectID(_id), user_id: user.email}, {$push: {items: {body: "Empty Item", ticked: false, editing: true}}}, (err, data) => {
+            userPosts.updateOne({_id: new mongodb.ObjectID(_id), user_id: user.email}, {$push: {items: {body: body, ticked: false, editing: true}}}, (err, data) => {
                 err ? reject(err) : resolve(data)
             })
         })

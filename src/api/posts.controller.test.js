@@ -49,9 +49,9 @@ module.exports = {
 	},
 	addUserSub: async (req, res) => {
 		let user = '115848234814211117122';
-		let { _id } = req.body;
+		let { _id, body } = req.body;
 		try {
-			const addSubResult = await postsDAO.addUserSub(user, _id)
+			const addSubResult = await postsDAO.addUserSub(user, _id, body)
 			//console.log(addSubResult.result.nModified)
 			res.status(200).json({ success: true})
 		} catch (error) {
