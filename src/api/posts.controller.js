@@ -91,7 +91,7 @@ module.exports = {
 		}
 		try {
 			const editBodyResult = await postsDAO.editBodySub(user, _id, ind, body)
-			res.status(200).json({ success: true, nModified: result.nModified })
+			res.status(200).json({ success: true, nModified: editBodyResult.nModified })
 		} catch (error) {
 			console.log(error)
 			res.status(500).json({ success: false })
