@@ -85,7 +85,8 @@ module.exports = {
 	editBodySub: async (req, res) => {
 		let user = req.user.googleId;
 		let { _id, ind, body } = req.body;
-		if(!_id || !ind) {
+		console.log(`_id: ${_id} ind: ${ind}`);
+		if(!_id || ind === null) {
 			res.status(400).json({success: false});
 			return;
 		}
