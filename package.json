@@ -4,7 +4,7 @@
   "description": "Express Backend for Todo",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon src/sever"
+    "server": "nodemon src/server"
   },
   "author": "Adam Lidén",
   "license": "MIT",
