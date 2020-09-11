@@ -97,6 +97,7 @@ module.exports = {
     ),
     editBodySub: (user, _id, ind, body) => (
         new Promise((resolve, reject) => {
+	    console.log(_id + ind);
             try {
                 const ID = new mongodb.ObjectID(_id)
                 const newBody = body;
