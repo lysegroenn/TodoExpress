@@ -14,7 +14,7 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
 (req, res) => {
     //console.log(req.session)
     //console.log('Redirecting back to React App with user: ' + req.user.displayName)
-    res.redirect('http://www.lysegroenn.com')
+    res.redirect('https://www.lysegroenn.com')
     //res.redirect('/api/users/')
 })
 
